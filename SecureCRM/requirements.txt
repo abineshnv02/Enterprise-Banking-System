@@ -1,0 +1,7 @@
+Django==5.2.4
+djangorestframework==3.17.1
+requests==2.32.4
+django-filter
+mysqlclient
+djangorestframework-simplejwt
+django-cors-headers

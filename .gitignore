@@ -1,0 +1,58 @@
+# ==============================
+# Python
+# ==============================
+
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.log
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Virtual Environments
+venv/
+.venv/
+env/
+
+# Environment Variables
+.env
+
+# SQLite
+db.sqlite3
+
+# Django Static
+staticfiles/
+media/
+
+# ==============================
+# React
+# ==============================
+
+node_modules/
+dist/
+build/
+
+# npm logs
+npm-debug.log*
+
+# ==============================
+# IDE
+# ==============================
+
+.vscode/
+.idea/
+
+# ==============================
+# Operating System
+# ==============================
+
+.DS_Store
+Thumbs.db
+
+# ==============================
+# Secrets
+# ==============================
+
+secrets.txt

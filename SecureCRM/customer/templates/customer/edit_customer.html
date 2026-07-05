@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Edit Customer</h2>
+
+<form method="POST">
+    {% csrf_token %}
+
+    <p>
+        <label>Name</label><br>
+        <input type="text"
+               name="name"
+               value="{{ customer.name }}">
+    </p>
+
+    <p>
+        <label>Email</label><br>
+        <input type="email"
+               name="email"
+               value="{{ customer.email }}">
+    </p>
+
+    <p>
+        <label>Phone</label><br>
+        <input type="text"
+               name="phone"
+               value="{{ customer.phone }}">
+    </p>
+
+    <p>
+        <label>Address</label><br>
+        <textarea name="address">{{ customer.address }}</textarea>
+    </p>
+
+    <button type="submit">
+        Update Customer
+    </button>
+
+</form>
+
+<br>
+
+<a href="/customer/">
+    ← Back to Customer List
+</a>
+
+{% endblock %}

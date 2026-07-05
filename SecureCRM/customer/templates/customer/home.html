@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Customer Registration</h2>
+
+<form method="POST">
+    {% csrf_token %}
+
+    <p>
+        <label>Customer Name</label><br>
+        <input type="text" name="name">
+    </p>
+
+    <p>
+        <label>Email</label><br>
+        <input type="email" name="email">
+    </p>
+
+    <p>
+        <label>Phone Number</label><br>
+        <input type="text" name="phone">
+    </p>
+
+    <p>
+        <label>Address</label><br>
+        <textarea name="address"></textarea>
+    </p>
+
+    <button type="submit">
+        Save Customer
+    </button>
+
+</form>
+
+<hr>
+
+<h2>Customer List</h2>
+
+<table border="1" cellpadding="8">
+
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Address</th>
+        <th>Action</th>
+    </tr>
+
+    {% for customer in customers %}
+
+    <tr>
+
+        <td>{{ customer.id }}</td>
+        <td>{{ customer.name }}</td>
+        <td>{{ customer.email }}</td>
+        <td>{{ customer.phone }}</td>
+        <td>{{ customer.address }}</td>
+
+        <td>
+
+            <a href="/customer/edit/{{ customer.id }}/">
+                Edit
+            </a>
+
+            |
+
+            <a href="/customer/delete/{{ customer.id }}/"
+               onclick="return confirm('Are you sure you want to delete this customer?')">
+                Delete
+            </a>
+
+        </td>
+
+    </tr>
+
+    {% endfor %}
+
+</table>
+
+{% endblock %}

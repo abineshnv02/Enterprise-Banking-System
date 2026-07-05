@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Secure CRM</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+</head>
+
+<body>
+
+    <h1>Secure CRM</h1>
+    <nav>
+
+    <a href="/customer/">Home</a>
+    
+
+    |
+
+    <a href="/customer/">Add Customer</a>
+
+    </nav>
+    <hr>
+
+    {% block content %}
+
+    {% endblock %}
+
+</body>
+
+</html>
