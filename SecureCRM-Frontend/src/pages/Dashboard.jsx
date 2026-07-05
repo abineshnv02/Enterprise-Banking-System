@@ -1,5 +1,6 @@
 import DashboardCards from "../components/DashboardCards";
 import RecentCustomers from "../components/RecentCustomers";
+import CustomerGrowthChart from "../components/CustomerGrowthChart";
 
 function Dashboard() {
 
@@ -14,7 +15,7 @@ function Dashboard() {
             </h2>
 
             <DashboardCards />
-
+            <CustomerGrowthChart />
             <RecentCustomers />
 
         </div>

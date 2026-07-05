@@ -25,3 +25,15 @@ export async function getRecentCustomers() {
     return response.data;
 
 }
+
+export async function getCustomerGrowth() {
+
+    const response = await axios.get(
+
+        `${BASE_URL}/dashboard/customer-growth/`
+
+    );
+
+    return response.data;
+
+}

@@ -45,7 +45,10 @@ path(
         "dashboard/recent-customers/",
         recent_customers
     ),
-
+path(
+    "dashboard/customer-growth/",
+    views.customer_growth
+),
 ]
 
 
