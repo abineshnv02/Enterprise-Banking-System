@@ -2,13 +2,16 @@ import axios from "axios";
 
 const BASE_URL = "http://127.0.0.1:8000/customer";
 
-export async function getCustomers(search = "") {
+
+export async function getCustomers(search = "", page = 1) {
 
     const response = await axios.get(
-        `${BASE_URL}/customers/?search=${search}`
+
+        `${BASE_URL}/customers/?search=${search}&page=${page}`
+
     );
 
-    return response.data.results;
+    return response.data;
 
 }
 

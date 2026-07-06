@@ -11,20 +11,27 @@ function Customers() {
     const [customers, setCustomers] = useState([]);
     const [selectedCustomer, setSelectedCustomer] = useState(null);
     const [search, setSearch] = useState("");
+    const [page, setPage] = useState(1);
+    const [hasNext, setHasNext] = useState(false);
+    const [hasPrevious, setHasPrevious] = useState(false);
+    const [totalCustomers, setTotalCustomers] = useState(0);
 
     useEffect(() => {
 
     loadCustomers();
 
-        }, [search]);
+        }, [search, page]);
 
     async function loadCustomers() {
 
-        const data = await getCustomers(search);
+        const data = await getCustomers(search, page);
 
         console.log("Customers received:", data);
 
-        setCustomers(data);
+        setCustomers(data.results);
+        setTotalCustomers(data.count);
+        setHasNext(data.next !== null);
+        setHasPrevious(data.previous !== null);
 
     }
 
@@ -48,9 +55,12 @@ function Customers() {
 
             </div>
     <CustomerSearch
-        search={search}
-        setSearch={setSearch}
-              />
+    search={search}
+    setSearch={(value) => {
+        setPage(1);
+        setSearch(value);
+    }}
+/>
 
     <CustomerTable
 
@@ -73,7 +83,34 @@ function Customers() {
     <DeleteCustomerModal
             selectedCustomer={selectedCustomer}
             refreshCustomers={loadCustomers}
-/>
+                />
+
+    <div className="d-flex justify-content-between mt-4">
+
+    <button
+        className="btn btn-secondary"
+        disabled={!hasPrevious}
+        onClick={() => setPage(page - 1)}
+    >
+        Previous
+    </button>
+
+    <div className="text-center">
+    <div>Page {page}</div>
+    <small className="text-muted">
+        Total Customers: {totalCustomers}
+    </small>
+        </div>
+
+    <button
+        className="btn btn-primary"
+        disabled={!hasNext}
+        onClick={() => setPage(page + 1)}
+    >
+        Next
+    </button>
+
+</div>
 
         </div>
 
