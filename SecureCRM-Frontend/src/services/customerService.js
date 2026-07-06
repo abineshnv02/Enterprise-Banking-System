@@ -3,11 +3,15 @@ import axios from "axios";
 const BASE_URL = "http://127.0.0.1:8000/customer";
 
 
-export async function getCustomers(search = "", page = 1) {
+export async function getCustomers(
+    search = "",
+    page = 1,
+    ordering = "-id"
+) {
 
     const response = await axios.get(
 
-        `${BASE_URL}/customers/?search=${search}&page=${page}`
+        `${BASE_URL}/customers/?search=${search}&page=${page}&ordering=${ordering}`
 
     );
 

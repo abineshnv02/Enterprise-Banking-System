@@ -7,6 +7,7 @@ from django.http import JsonResponse
 from .serializers import CustomerSerializer
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from .services.gemini_service import generate_customer_summary
 from rest_framework import status, generics, mixins, viewsets, filters
 #from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly,\
                                     #IsAdminUser
@@ -277,3 +278,27 @@ def customer_growth(request):
     )
 
     return Response(growth)
+
+@api_view(["POST"])
+def ai_customer_summary(request):
+
+    customer_id = request.data.get("customer_id")
+
+    try:
+
+        customer = Customer.objects.get(id=customer_id)
+
+    except Customer.DoesNotExist:
+
+        return Response(
+            {"error": "Customer not found"},
+            status=404
+        )
+
+    summary = generate_customer_summary(customer)
+
+    return Response({
+
+        "summary": summary
+
+    })

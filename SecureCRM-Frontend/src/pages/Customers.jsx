@@ -5,6 +5,7 @@ import CustomerTable from "../components/CustomerTable";
 import CustomerSearch from "../components/CustomerSearch";
 import CustomerModal from "../components/CustomerModal";
 import DeleteCustomerModal from "../components/DeleteCustomerModal";
+import AISummaryModal from "../components/AISummaryModal";
 
 function Customers() {
 
@@ -84,6 +85,9 @@ function Customers() {
             selectedCustomer={selectedCustomer}
             refreshCustomers={loadCustomers}
                 />
+                
+    <AISummaryModal
+    selectedCustomer={selectedCustomer}/>
 
     <div className="d-flex justify-content-between mt-4">
 

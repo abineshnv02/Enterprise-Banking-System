@@ -49,6 +49,11 @@ path(
     "dashboard/customer-growth/",
     views.customer_growth
 ),
+path(
+    "ai-summary/",
+    views.ai_customer_summary,
+    name="ai-summary",
+),
 ]
 
 

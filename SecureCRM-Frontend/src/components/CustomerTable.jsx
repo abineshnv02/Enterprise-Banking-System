@@ -4,6 +4,7 @@ function CustomerTable({
 
     setSelectedCustomer,
 
+
 }) {
 
     return (
@@ -47,7 +48,21 @@ function CustomerTable({
                         <td>{customer.address}</td>
 
                         <td>
+                            <button
 
+                                    className="btn btn-success btn-sm me-2"
+
+                                    data-bs-toggle="modal"
+
+                                    data-bs-target="#aiSummaryModal"
+
+                                    onClick={() => setSelectedCustomer(customer)}
+
+                                >
+
+                                    🤖 AI
+
+                                </button>
                             <button
 
                                         className="btn btn-primary btn-sm me-2"
