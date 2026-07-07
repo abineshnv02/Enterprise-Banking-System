@@ -6,7 +6,7 @@ from rest_framework_simplejwt.views import (
     TokenRefreshView,
 )
 from .views import dashboard, CustomerViewSet, recent_customers, \
-                     export_customers_excel
+                     export_customers_excel, export_customers_pdf
 
 router = DefaultRouter()
 
@@ -59,7 +59,10 @@ path(
     views.ai_customer_summary,
     name="ai-summary",
 ),
-
+path(
+    "export/pdf/",
+    export_customers_pdf,
+),
 ]
 
 

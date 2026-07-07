@@ -151,3 +151,5 @@ CORS_ALLOWED_ORIGINS = [
 ]
 
 GEMINI_API_KEY = config("GEMINI_API_KEY")
+
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"

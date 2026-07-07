@@ -58,6 +58,18 @@ function Customers() {
         Export Excel
     </button>
 
+<button
+    className="btn btn-danger"
+    onClick={() =>
+        window.open(
+            "http://127.0.0.1:8000/customer/export/pdf/",
+            "_blank"
+        )
+    }
+>
+    Export PDF
+</button>
+
     <button
         className="btn btn-success"
         data-bs-toggle="modal"

@@ -1,3 +1,6 @@
+from reportlab.platypus import SimpleDocTemplate, Table, TableStyle
+from reportlab.lib import colors
+from reportlab.lib.units import inch
 import requests
 from openpyxl import Workbook
 from django.shortcuts import render, redirect, HttpResponse,\
@@ -342,5 +345,65 @@ def export_customers_excel(request):
     )
 
     workbook.save(response)
+
+    return response
+
+@api_view(["GET"])
+def export_customers_pdf(request):
+
+    response = HttpResponse(content_type="application/pdf")
+
+    response["Content-Disposition"] = (
+        'attachment; filename="customers.pdf"'
+    )
+
+    document = SimpleDocTemplate(
+        response,
+        pagesize=(8.5 * inch, 11 * inch)
+    )
+
+    data = [
+        [
+            "ID",
+            "Name",
+            "Email",
+            "Phone",
+            "Address"
+        ]
+    ]
+
+    customers = Customer.objects.all()
+
+    for customer in customers:
+
+        data.append([
+            customer.id,
+            customer.name,
+            customer.email,
+            customer.phone,
+            customer.address,
+        ])
+
+    table = Table(data)
+
+    table.setStyle(
+
+        TableStyle([
+
+            ("BACKGROUND", (0, 0), (-1, 0), colors.grey),
+
+            ("TEXTCOLOR", (0, 0), (-1, 0), colors.whitesmoke),
+
+            ("GRID", (0, 0), (-1, -1), 1, colors.black),
+
+            ("BACKGROUND", (0, 1), (-1, -1), colors.beige),
+
+            ("BOTTOMPADDING", (0, 0), (-1, 0), 10),
+
+        ])
+
+    )
+
+    document.build([table])
 
     return response

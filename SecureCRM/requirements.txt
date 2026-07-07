@@ -24,6 +24,7 @@ httplib2==0.32.0
 idna==3.18
 mysqlclient==2.2.8
 openpyxl==3.1.5
+pillow==12.3.0
 proto-plus==1.28.0
 protobuf==5.29.6
 pyasn1==0.6.3
@@ -35,6 +36,7 @@ PyJWT==2.13.0
 PyMySQL==1.2.0
 pyparsing==3.3.2
 python-decouple==3.8
+reportlab==5.0.0
 requests==2.34.2
 sqlparse==0.5.5
 tqdm==4.68.3
