@@ -44,15 +44,29 @@ function Customers() {
 
                 <h2>Customers</h2>
 
-                <button
-                    className="btn btn-success"
-                    data-bs-toggle="modal"
-                    data-bs-target="#customerModal"
-                >
+                <div className="d-flex gap-2">
 
-                    Add Customer
+    <button
+        className="btn btn-primary"
+        onClick={() => {
+            window.open(
+                "http://127.0.0.1:8000/customer/export/excel/",
+                "_blank"
+            );
+        }}
+    >
+        Export Excel
+    </button>
 
-                </button>
+    <button
+        className="btn btn-success"
+        data-bs-toggle="modal"
+        data-bs-target="#customerModal"
+    >
+        Add Customer
+    </button>
+
+</div>
 
             </div>
     <CustomerSearch

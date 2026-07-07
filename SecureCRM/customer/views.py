@@ -1,9 +1,10 @@
 import requests
+from openpyxl import Workbook
 from django.shortcuts import render, redirect, HttpResponse,\
                              get_object_or_404
 from .models import Customer
 from django.contrib import messages
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from .serializers import CustomerSerializer
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -302,3 +303,44 @@ def ai_customer_summary(request):
         "summary": summary
 
     })
+
+@api_view(["GET"])
+def export_customers_excel(request):
+
+    workbook = Workbook()
+
+    sheet = workbook.active
+
+    sheet.title = "Customers"
+
+    sheet.append([
+        "ID",
+        "Name",
+        "Email",
+        "Phone",
+        "Address"
+    ])
+
+    customers = Customer.objects.all()
+
+    for customer in customers:
+
+        sheet.append([
+            customer.id,
+            customer.name,
+            customer.email,
+            customer.phone,
+            customer.address,
+        ])
+
+    response = HttpResponse(
+        content_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+    )
+
+    response["Content-Disposition"] = (
+        'attachment; filename="customers.xlsx"'
+    )
+
+    workbook.save(response)
+
+    return response
