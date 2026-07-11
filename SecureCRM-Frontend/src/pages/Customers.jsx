@@ -16,6 +16,7 @@ function Customers() {
     const [hasNext, setHasNext] = useState(false);
     const [hasPrevious, setHasPrevious] = useState(false);
     const [totalCustomers, setTotalCustomers] = useState(0);
+    const role = localStorage.getItem("role");
 
     useEffect(() => {
 
@@ -24,6 +25,8 @@ function Customers() {
         }, [search, page]);
 
     async function loadCustomers() {
+
+    try {
 
         const data = await getCustomers(search, page);
 
@@ -35,6 +38,21 @@ function Customers() {
         setHasPrevious(data.previous !== null);
 
     }
+
+    catch (error) {
+
+        console.error("Customer API Error:", error);
+
+        if (error.response) {
+
+            console.log("Status:", error.response.status);
+            console.log("Response:", error.response.data);
+
+        }
+
+    }
+
+}
 
     return (
 
@@ -58,6 +76,7 @@ function Customers() {
         Export Excel
     </button>
 
+{role !== "Viewer" && (
 <button
     className="btn btn-danger"
     onClick={() =>
@@ -69,14 +88,22 @@ function Customers() {
 >
     Export PDF
 </button>
+)}
+
+
+{role !== "Viewer" && (
 
     <button
         className="btn btn-success"
         data-bs-toggle="modal"
         data-bs-target="#customerModal"
     >
+
         Add Customer
+
     </button>
+
+)}
 
 </div>
 

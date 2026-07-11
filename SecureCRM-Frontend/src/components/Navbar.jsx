@@ -1,51 +1,169 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-function Navbar() {
-    return (
-        <nav className="navbar navbar-expand-lg navbar-dark bg-primary shadow">
+function Navbar(){
 
-            <div className="container-fluid">
+    const navigate = useNavigate();
 
-                <Link className="navbar-brand fw-bold" to="/">
-                    SecureCRM
-                </Link>
+    const token = localStorage.getItem("access");
+    const username = localStorage.getItem("username");
 
-                <div className="navbar-nav ms-4">
+    const role = localStorage.getItem("role");
 
-                    <Link className="nav-link text-white" to="/">
-                        Dashboard
-                    </Link>
+    function logout(){
 
-                    <Link className="nav-link text-white" to="/customers">
-                        Customers
-                    </Link>
+        localStorage.clear();
 
-                    <Link className="nav-link text-white" to="/ledger">
-                        Ledger
-                    </Link>
+        navigate("/");
 
-                    <Link className="nav-link text-white" to="/reports">
-                        Reports
-                    </Link>
+    }
 
-                    <Link className="nav-link text-white" to="/settings">
-                        Settings
-                    </Link>
+    return(
 
-                </div>
+<nav className="navbar navbar-expand-lg navbar-dark bg-dark">
 
-                <div className="ms-auto">
+<div className="container">
 
-                    <i className="bi bi-person-circle me-2"></i>
+<Link
+className="navbar-brand fw-bold"
+to="/"
+>
 
-                    Admin
+🛡 SecureCRM
 
-                </div>
+</Link>
 
-            </div>
+<div className="collapse navbar-collapse">
 
-        </nav>
-    );
+<ul className="navbar-nav me-auto">
+
+<li className="nav-item">
+
+<Link
+className="nav-link"
+to="/"
+>
+
+Home
+
+</Link>
+
+</li>
+
+{token && (
+
+<>
+
+<li className="nav-item">
+
+<Link
+className="nav-link"
+to="/dashboard"
+>
+
+Dashboard
+
+</Link>
+
+</li>
+
+<li className="nav-item">
+
+<Link
+className="nav-link"
+to="/customers"
+>
+
+Customers
+
+</Link>
+
+</li>
+
+<li className="nav-item">
+
+<Link
+className="nav-link"
+to="/reports"
+>
+
+Reports
+
+</Link>
+
+</li>
+
+</>
+
+)}
+
+</ul>
+
+<div className="d-flex align-items-center">
+
+{token && (
+
+<div className="text-white me-4 text-end">
+
+<div>
+
+<b>
+
+{username}
+
+</b>
+
+</div>
+
+<small>
+
+{role}
+
+</small>
+
+</div>
+
+)}
+
+{!token ?
+
+(
+
+<Link
+to="/login"
+className="btn btn-warning"
+>
+
+Login
+
+</Link>
+
+)
+
+:
+
+(
+
+<button
+className="btn btn-danger"
+onClick={logout}
+>
+
+Logout
+
+</button>
+
+)}
+
+</div>
+
+</div>
+
+</div>
+
+</nav>
+
+);
+
 }
 
 export default Navbar;

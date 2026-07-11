@@ -1,3 +1,4 @@
+from .jwt_views import CustomTokenObtainPairView
 from django.urls import path, include
 from . import views
 from rest_framework.routers import DefaultRouter
@@ -7,6 +8,7 @@ from rest_framework_simplejwt.views import (
 )
 from .views import dashboard, CustomerViewSet, recent_customers, \
                      export_customers_excel, export_customers_pdf
+from .register_views import RegisterAPIView
 
 router = DefaultRouter()
 
@@ -24,16 +26,12 @@ urlpatterns = [
     path("api/<int:id>/", views.customer_detail_api, name="customer_detail_api"),
     path("generic/customers/", views.CustomerListAPI.as_view(), name="customer_list_generic"),
     path("generic/customers/<int:pk>/", views.CustomerDetailAPI.as_view(), name="customer_detail_generic",),
-    path(
-    "token/",
-    TokenObtainPairView.as_view(),
-    name="token_obtain_pair",
-),
+
 
 path(
-    "token/refresh/",
-    TokenRefreshView.as_view(),
-    name="token_refresh",
+    "token/",
+    CustomTokenObtainPairView.as_view(),
+    name="token_obtain_pair",
 ),
     path(
     "ledger/<int:customer_id>/",
@@ -62,6 +60,11 @@ path(
 path(
     "export/pdf/",
     export_customers_pdf,
+),
+path(
+    "register/",
+    RegisterAPIView.as_view(),
+    name="register",
 ),
 ]
 

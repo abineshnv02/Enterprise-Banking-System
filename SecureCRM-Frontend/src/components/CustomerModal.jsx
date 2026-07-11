@@ -1,6 +1,13 @@
 import { useState, useRef, useEffect } from "react";
 
-import { addCustomer } from "../services/customerService";
+import {
+
+    addCustomer,
+
+    updateCustomer,
+
+} from "../services/customerService";
+
 import { toast } from "react-toastify";
 
 function CustomerModal({
@@ -71,11 +78,32 @@ function handleChange(e) {
     });
 
 }
+
 async function saveCustomer() {
 
     try {
 
-        await addCustomer(customer);
+        if (isEditMode) {
+
+            await updateCustomer(
+
+                customer.id,
+
+                customer
+
+            );
+
+            toast.success("Customer Updated Successfully!");
+
+        }
+
+        else {
+
+            await addCustomer(customer);
+
+            toast.success("Customer Added Successfully!");
+
+        }
 
         await refreshCustomers();
 
@@ -91,9 +119,9 @@ async function saveCustomer() {
 
         });
 
-        closeButtonRef.current.click();
+        setSelectedCustomer(null);
 
-        toast.success("Customer Added Successfully!");
+        closeButtonRef.current.click();
 
     }
 
@@ -217,10 +245,11 @@ async function saveCustomer() {
                     <div className="modal-footer">
 
                         <button
-                            ref={closeButtonRef}
-                            className="btn btn-secondary"
-                            data-bs-dismiss="modal"
-                        >
+                                ref={closeButtonRef}
+                                className="btn btn-secondary"
+                                data-bs-dismiss="modal"
+                                onClick={() => setSelectedCustomer(null)}
+                            >
 
                             Cancel
 

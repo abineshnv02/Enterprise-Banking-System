@@ -9,13 +9,13 @@ from .models import Customer
 from django.contrib import messages
 from django.http import JsonResponse, HttpResponse
 from .serializers import CustomerSerializer
+from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .services.gemini_service import generate_customer_summary
 from rest_framework import status, generics, mixins, viewsets, filters
-#from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly,\
-                                    #IsAdminUser
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import IsAuthenticated
+
 from .permissions import IsAdminForDeleteOnly  
 from django_filters.rest_framework import DjangoFilterBackend   
 from django.conf import settings 
@@ -160,8 +160,12 @@ class CustomerViewSet(viewsets.ModelViewSet):
 
     serializer_class = CustomerSerializer
 
-    #permission_classes = [IsAdminUser, IsAuthenticated, IsAdminForDeleteOnly]
-    permission_classes = [AllowAny]
+    authentication_classes = [ 
+       JWTAuthentication, 
+   ]
+
+    permission_classes = [IsAuthenticated,]
+    #permission_classes = [IsAdminForDeleteOnly]
 
     filter_backends = [filters.SearchFilter, filters.OrderingFilter, DjangoFilterBackend,]
 

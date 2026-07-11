@@ -1,12 +1,12 @@
-import axios from "axios";
+import api from "./api";
 
 const BASE_URL = "http://127.0.0.1:8000/customer";
 
 export async function getDashboardData() {
 
-    const response = await axios.get(
+    const response = await api.get(
 
-        `${BASE_URL}/dashboard/`
+        `/dashboard/`
 
     );
 
@@ -16,9 +16,9 @@ export async function getDashboardData() {
 
 export async function getRecentCustomers() {
 
-    const response = await axios.get(
+    const response = await api.get(
 
-        `${BASE_URL}/dashboard/recent-customers/`
+        `/dashboard/recent-customers/`
 
     );
 
@@ -28,9 +28,9 @@ export async function getRecentCustomers() {
 
 export async function getCustomerGrowth() {
 
-    const response = await axios.get(
+    const response = await api.get(
 
-        `${BASE_URL}/dashboard/customer-growth/`
+        "/dashboard/customer-growth/"
 
     );
 

@@ -11,6 +11,9 @@ import Settings from "./pages/Settings";
 import { Routes, Route } from "react-router-dom";
 import Login from "./pages/Login";
 import ProtectedRoute from "./components/ProtectedRoute";
+import Home from "./pages/Home";
+
+import Register from "./pages/Register";
 
 function App() {
   return (
@@ -19,13 +22,28 @@ function App() {
 
       <Routes>
         <Route
+
                 path="/"
+
+                element={<Home/>}
+
+                />
+
+                <Route
+
+                path="/dashboard"
+
                 element={
-                    <ProtectedRoute>
-                        <Dashboard />
-                    </ProtectedRoute>
+
+                <ProtectedRoute>
+
+                <Dashboard/>
+
+                </ProtectedRoute>
+
                 }
-            />
+
+                />
 
         <Route
     path="/customers"
@@ -64,6 +82,7 @@ function App() {
 />
 
         <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
 
       </Routes>
 

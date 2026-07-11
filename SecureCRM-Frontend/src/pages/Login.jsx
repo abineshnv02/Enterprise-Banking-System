@@ -21,9 +21,13 @@ function Login() {
 
             localStorage.setItem("refresh", tokens.refresh);
 
+            localStorage.setItem("username", tokens.username);
+
+            localStorage.setItem("role", tokens.role);
+
             toast.success("Login Successful!");
 
-            navigate("/");
+            navigate("/dashboard");
 
         }
 

@@ -6,7 +6,7 @@ function CustomerTable({
 
 
 }) {
-
+    const role = localStorage.getItem("role");
     return (
 
         <table className="table table-hover table-bordered">
@@ -48,6 +48,7 @@ function CustomerTable({
                         <td>{customer.address}</td>
 
                         <td>
+                            {role !== "Viewer" && (
                             <button
 
                                     className="btn btn-success btn-sm me-2"
@@ -63,37 +64,32 @@ function CustomerTable({
                                     🤖 AI
 
                                 </button>
-                            <button
+                            )}
+                            {role !== "Viewer" && (
 
-                                        className="btn btn-primary btn-sm me-2"
+                                        <button
+                                            className="btn btn-primary btn-sm me-2"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#customerModal"
+                                            onClick={() => setSelectedCustomer(customer)}
+                                        >
+                                            Edit
+                                        </button>
 
+                                    )}
+
+                            {role === "Admin" && (
+
+                                    <button
+                                        className="btn btn-danger btn-sm"
                                         data-bs-toggle="modal"
-
-                                        data-bs-target="#customerModal"
-
+                                        data-bs-target="#deleteCustomerModal"
                                         onClick={() => setSelectedCustomer(customer)}
-
                                     >
-
-                                        Edit
-
+                                        Delete
                                     </button>
 
-                            <button
-
-                                    className="btn btn-danger btn-sm"
-
-                                    data-bs-toggle="modal"
-
-                                    data-bs-target="#deleteCustomerModal"
-
-                                    onClick={() => setSelectedCustomer(customer)}
-
-                                >
-
-                                    Delete
-
-                                        </button>
+                                )}
 
                         </td>
 

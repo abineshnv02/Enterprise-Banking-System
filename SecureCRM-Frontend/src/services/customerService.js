@@ -1,7 +1,4 @@
-import axios from "axios";
-
-const BASE_URL = "http://127.0.0.1:8000/customer";
-
+import api from "./api";
 
 export async function getCustomers(
     search = "",
@@ -9,21 +6,20 @@ export async function getCustomers(
     ordering = "-id"
 ) {
 
-    const response = await axios.get(
+    const response = await api.get(
 
-        `${BASE_URL}/customers/?search=${search}&page=${page}&ordering=${ordering}`
+    `/customers/?search=${search}&page=${page}&ordering=${ordering}`
 
-    );
-
+);
     return response.data;
 
 }
 
 export async function addCustomer(customer) {
 
-    const response = await axios.post(
+    const response = await api.post(
 
-        `${BASE_URL}/customers/`,
+        "/customers/",
 
         customer
 
@@ -35,9 +31,9 @@ export async function addCustomer(customer) {
 
 export async function updateCustomer(id, customer) {
 
-    const response = await axios.put(
+    const response = await api.put(
 
-        `${BASE_URL}/customers/${id}/`,
+        `/customers/${id}/`,
 
         customer
 
@@ -49,9 +45,9 @@ export async function updateCustomer(id, customer) {
 
 export async function deleteCustomer(id) {
 
-    const response = await axios.delete(
+    const response = await api.delete(
 
-        `${BASE_URL}/customers/${id}/`
+        `/customers/${id}/`
 
     );
 
